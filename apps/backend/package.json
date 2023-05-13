@@ -26,6 +26,31 @@
           "name": "Name Genie"
         }
       ]
+    },
+    "configuration": {
+      "title": "Name Genie",
+      "properties": {
+        "name-genie.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for ChatGPT"
+        },
+        "name-genie.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo-0301",
+          "enum": [
+            "gpt-3.5-turbo-0301",
+            "gpt-3.5-turbo",
+            "gpt-4"
+          ],
+          "description": "Model for ChatGPT"
+        },
+        "name-genie.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "description": "Temperature for ChatGPT"
+        }
+      }
     }
   },
   "scripts": {
