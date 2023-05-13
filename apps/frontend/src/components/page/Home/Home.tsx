@@ -1,6 +1,6 @@
 import React, { useCallback, FormEvent, useState, useEffect, useContext } from "react";
 import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
-import styles from "./index.module.css";
+import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
 
 export function HomeIndexPage() {
