@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import { VSCodeProvider } from "./components/ui/VSCodeProvider/VSCodeProvider";
 
 let router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ let router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
+  return (
+    <VSCodeProvider>
+      <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+    </VSCodeProvider>
+  );
 }
 
 if (import.meta.hot) {
