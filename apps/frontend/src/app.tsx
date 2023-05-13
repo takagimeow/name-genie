@@ -1,6 +1,7 @@
 import React from "react";
 import {
   createBrowserRouter,
+  Outlet,
   RouterProvider,
   useLoaderData,
 } from "react-router-dom";
@@ -29,4 +30,8 @@ export default function App() {
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => router.dispose());
+}
+
+export function Root() {
+  return <Outlet />;
 }
