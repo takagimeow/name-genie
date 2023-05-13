@@ -1,6 +1,6 @@
 import React, { useCallback, FormEvent, useState, useEffect, useContext } from "react";
-import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
-import styles from "./index.module.css";
+import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField, VSCodeProgressRing } from "@vscode/webview-ui-toolkit/react";
+import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
 
 export function HomeIndexPage() {
@@ -8,6 +8,7 @@ export function HomeIndexPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState("");
+  const [results, setResults] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState("variableName");
   const [description1, setDescription1] = useState("");
   const [description2, setDescription2] = useState("");
@@ -55,6 +56,8 @@ export function HomeIndexPage() {
       switch (message.command) {
           case 'result':
             setResult(message.value)
+            const newResult = JSON.parse(message.value);
+            setResults([newResult.result1, newResult.result2, newResult.result3]);
             break;
       }
       setLoading(false);
@@ -90,11 +93,21 @@ export function HomeIndexPage() {
           <div className="w-full h-full py-3 flex flex-col">
             {
               loading ? (
-                <p>結果を取得中</p>
+                <div className="flex flex-col items-center justify-center">
+                  <VSCodeProgressRing />
+                </div>
               ) : (
                 <>
                   <p mb-3>結果</p>
-                  {result}
+                  <ul>
+                    {
+                      results.map((value) => {
+                        return (
+                          <li key={value}>{value}</li>
+                        );
+                      })
+                    }
+                  </ul>
                 </>
               )
             }
