@@ -1,0 +1,1 @@
+export { HomeIndexPage } from "./Home"
