@@ -17,7 +17,16 @@
         "command": "name-genie.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "name-genie.webview",
+          "name": "Name Genie"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
