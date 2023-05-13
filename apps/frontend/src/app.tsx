@@ -7,16 +7,24 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import { HomeIndexPage } from "./components/page/Home/Home";
 import { VSCodeProvider } from "./components/ui/VSCodeProvider/VSCodeProvider";
 
 let router = createBrowserRouter([
   {
     path: "/",
-    loader: () => ({ message: "Hello Data Router!" }),
-    Component() {
-      let data = useLoaderData() as { message: string };
-      return <h1>{data.message}</h1>;
-    },
+    Component: Root,
+    children: [
+      {
+        path: "/index.html",
+        index: true,
+        loader: () => ({ message: "Hello Data Router!" }),
+        Component() {
+          let data = useLoaderData() as { message: string };
+          return <HomeIndexPage />;
+        },
+      },
+    ],
   },
 ]);
 
