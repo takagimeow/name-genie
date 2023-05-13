@@ -3,6 +3,7 @@
 import { readFileSync } from 'fs';
 import { join, sep } from 'path';
 import * as vscode from 'vscode';
+import { Configuration, OpenAIApi } from "openai";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -60,10 +61,68 @@ class WebViewProvider {
 		};
 		webviewView.webview.html = indexHtml;
 		webviewView.webview.onDidReceiveMessage(
-			message => {
+			async message => {
 				console.log("message: ", message);
+
+				const config = vscode.workspace.getConfiguration("chatgpt-editor");
+				// Obtain an API key
+				const apikey = config.get("apiKey") as string | undefined;
+				// Obtain a model
+				// const model = config.get("model") as GPTModel | undefined;
+				// Get temperature
+				// const temperature = config.get("temperature") as number | undefined;
+				if (!apikey && typeof apikey !== "string") {
+					vscode.window.showErrorMessage("API key is not set.");
+					return;
+				}
+				/*
+				if (!model && typeof model !== "string") {
+					vscode.window.showErrorMessage("No model is set.");
+					return;
+				}
+				*/
+				const openaiConfig = new Configuration({ apiKey: apikey });
+				const openaiClient = new OpenAIApi(openaiConfig);
+
+				let command = "関数名";
+				switch (message.command) {
+					case "variableName":
+						command = "変数名";
+						break;
+					case "functionName":
+						command = "関数名";
+						break;
+					case "fileName":
+						command = "ファイル名";
+						break;
+				}
+				let text = ''
+				const descriptions = [message.description1, message.description2, message.description3]
+				descriptions.filter((value) => value).map((value) => { text += `- ${value}\n`  })
+				const prompt = `
+				次の内容を表す${command}を3つ作成してください。
+				===
+				${text}
+				===
+
+				出力結果は次のJSONフォーマットに沿って出力してください。
+				それ以外の文字列は出力しないでください。
+				===
+				{
+					"result1": "createAudio",
+					"result2": "convertTextToAudio",
+					"result3": "convertTxtToAudio"
+				}
+				===
+				`
+				const response = await openaiClient.createChatCompletion({
+					model: "gpt-4",
+					messages: [{ role: "user", content: prompt }],
+				});
+				const content = response.data.choices[0].message?.content;
+				console.log("content: ", content);
 				// send message
-				webviewView.webview.postMessage({ command: "result", value: "Hello from the extension" });
+				webviewView.webview.postMessage({ command: "result", value: content });
 			}
 		);
 	}
