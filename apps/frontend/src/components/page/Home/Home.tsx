@@ -94,7 +94,11 @@ export function HomeIndexPage() {
       switch (message.command) {
         case 'result':
           const newResult = JSON.parse(message.value);
-          setResults([newResult.result1, newResult.result2, newResult.result3]);
+          // check newResult has data property and newResult.data is an array of string
+          if (!newResult.data || !Array.isArray(newResult.data)) {
+            break;
+          }
+          setResults(newResult.data);
           break;
       }
       setLoading(false);
