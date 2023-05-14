@@ -121,14 +121,29 @@ export function HomeIndexPage() {
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-1">説明1<span className="text-red-500">*</span></label>
           <VSCodeTextField id="my-text-field-1" name="example1" className="w-full" onChange={handleDescriptionChange} />
+          {
+            description1Error && (
+              <p className="text-red-500 text-xs">{description1Error}</p>
+            )
+          }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-2">説明2<span className="">{"(オプション)"}</span></label>
           <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          {
+            description2Error && (
+              <p className="text-red-500 text-xs">{description2Error}</p>
+            )
+          }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-3">説明3<span className="">{"(オプション)"}</span></label>
           <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          {
+            description3Error && (
+              <p className="text-red-500 text-xs">{description3Error}</p>
+            )
+          }
         </div>
         <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Submit</VSCodeButton>
       </form>
