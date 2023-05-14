@@ -1,81 +1,85 @@
-# Turborepo starter
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="apps/backend/static/name-genie.png">
+    <img alt="Name Genie" src="apps/backend/static/name-genie.png" width="100%">
+  </picture>
+</p>
 
-This is an official starter Turborepo.
+<div align="center">
 
-## Using this example
+# Name Genie
 
-Run the following command:
+**The VSCode extension addresses the common challenge that developers face when it comes to naming. It provides a solution for naming conventions.**
 
-```sh
-npx create-turbo@latest
-```
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Github stars](https://img.shields.io/github/stars/takagimeow/name-genie)](https://github.com/takagimeow/name-genie)
 
-## What's inside?
+</div>
 
-This Turborepo includes the following packages/apps:
+## Features
 
-### Apps and Packages
+The extension provides the following features:
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- Name Genie automatically generates names for variables, functions, and class names that you want to create.
+- You can provide up to three descriptions, and the feature will generate a name based on the given descriptions.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+![Name Genie WebView](apps/backend/static/ask-genie.png)
 
-### Utilities
+## Links
 
-This Turborepo has some additional tools already setup for you:
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+- [GitHub Repository](https://github.com/takagimeow/name-genie)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Requirements
 
-### Build
+In order to use this extension, you will need an API key from OpenAI.
 
-To build all apps and packages, run the following command:
+1. Go to [OpenAI's account page](https://platform.openai.com/account/api-keys). If you don't have an account, you will need to create one or sign up.
+2. Click on the `Create new secret key` button.
+3. Copy the key and paste it into the `API Key for ChatGPT` field in the extension settings.
 
-```
-cd my-turborepo
-pnpm build
-```
+## Extension Settings
 
-### Develop
+Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
 
-To develop all apps and packages, run the following command:
+For example:
 
-```
-cd my-turborepo
-pnpm dev
-```
+This extension contributes the following settings:
 
-### Remote Caching
+- `name-genie.apiKey`: The key is used to authenticate with the OpenAI API.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+| Key                 | Description                                          | Value       |
+| ------------------- | ---------------------------------------------------- | ----------- |
+| `name-genie.apiKey` | The key is used to authenticate with the OpenAI API. | `xx-xx-xxx` |
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+For this extension to work, the above setting must be set.
 
-```
-cd my-turborepo
-npx turbo login
-```
+Optional settings:
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+| Key                      | Description                             | Value                                          |
+| ------------------------ | --------------------------------------- | ---------------------------------------------- |
+| `name-genie.model`       | The model used to generate texts.       | `gpt-4`, `gpt-3.5-turbo-0301`, `gpt-3.5-turbo` |
+| `name-genie.temperature` | The temperature used to generate texts. | `0.1` ~ `1.0`                                  |
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Disclaimer
 
-```
-npx turbo link
-```
+This extension is not an official extension of OpenAI.
+The author of this extension is not affiliated with OpenAI in any way.
 
-## Useful Links
+## Privacy Policy
 
-Learn more about the power of Turborepo:
+The texts are generated via the online service of [ChatGPT](http://chat.openai.com/).
+Please take a look at the [privacy policy](https://openai.com/policies/privacy-policy) of OpenAI.
+Do not use this extension if you do not agree with the privacy policy.
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Release Notes
+
+Users appreciate release notes as you update your extension.
+
+### 1.0.0
+
+Initial release of name-genie
+
+[MIT LICENSE](LICENSE)
