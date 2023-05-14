@@ -77,6 +77,9 @@ export function HomeIndexPage() {
       return;
     }
 
+    setDescription1Error("");
+    setDescription2Error("");
+    setDescription3Error("");
     setLoading(true);
     setSubmitted(true);
 
