@@ -149,7 +149,7 @@ export function HomeIndexPage() {
             )
           }
         </div>
-        <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Submit</VSCodeButton>
+        <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Ask AI</VSCodeButton>
       </form>
       {
         submitted && (
