@@ -50,18 +50,22 @@ export function HomeIndexPage() {
   }, [vscode, selectedOption, description1, description2, description3]);
 
   useEffect(() => {
-    window.addEventListener('message', event => {
-
+    const callback = (event: MessageEvent) => {
       const message = event.data; // The JSON data our extension sent
       switch (message.command) {
-          case 'result':
-            setResult(message.value)
-            const newResult = JSON.parse(message.value);
-            setResults([newResult.result1, newResult.result2, newResult.result3]);
-            break;
+        case 'result':
+          setResult(message.value)
+          const newResult = JSON.parse(message.value);
+          setResults([newResult.result1, newResult.result2, newResult.result3]);
+          break;
       }
       setLoading(false);
-  });
+    }
+    window.addEventListener('message', callback);
+
+    return () => {
+      window.removeEventListener('message', callback);
+    }
   }, [])
   return (
     <div className="py-3 w-full h-full">
