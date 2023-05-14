@@ -2,7 +2,7 @@
   "name": "name-genie",
   "displayName": "Name Genie",
   "description": "Suggests variable names, function names, and file names.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [
     "vscode",
     "naming",
