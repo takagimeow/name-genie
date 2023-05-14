@@ -15,7 +15,6 @@ export function HomeIndexPage() {
   const { vscode } = useContext(VSCodeContext);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState("variableName");
   const [description1, setDescription1] = useState("");
@@ -94,7 +93,6 @@ export function HomeIndexPage() {
       const message = event.data; // The JSON data our extension sent
       switch (message.command) {
         case 'result':
-          setResult(message.value)
           const newResult = JSON.parse(message.value);
           setResults([newResult.result1, newResult.result2, newResult.result3]);
           break;
