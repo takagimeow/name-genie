@@ -2,14 +2,42 @@
   "name": "name-genie",
   "displayName": "Name Genie",
   "description": "Suggests variable names, function names, and file names.",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "keywords": [
+    "vscode",
+    "naming",
+    "dx",
+    "chatgpt",
+    "AI",
+    "GPT-3",
+    "GPT-4",
+    "openai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/takagimeow/name-genie"
+  },
+  "preview": false,
+  "license": "MIT",
+  "author": {
+    "name": "Keisuke Takagi",
+    "email": "mit@takagi.app"
+  },
+  "publisher": "takagimeow",
   "engines": {
     "vscode": "^1.78.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "icon": "resources/extensionIcon.png",
+  "galleryBanner": {
+    "color": "#212121",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "views": {
