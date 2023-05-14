@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="static/name-genie.png">
-    <img alt="Name Genie" src="static/name-genie.png" width="100%">
+    <img alt="Name Genie" src="https://github.com/takagimeow/name-genie/blob/main/apps/backend/static/name-genie.png?raw=true" width="100%">
   </picture>
 </p>
 
@@ -25,7 +25,7 @@ The extension provides the following features:
 - Name Genie automatically generates names for variables, functions, and class names that you want to create.
 - You can provide up to three descriptions, and the feature will generate a name based on the given descriptions.
 
-![Name Genie WebView](static/ask-genie.png)
+![Name Genie WebView](https://github.com/takagimeow/name-genie/blob/main/apps/backend/static/ask-genie.png?raw=true)
 
 ## Links
 
