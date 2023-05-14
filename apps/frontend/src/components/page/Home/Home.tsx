@@ -113,7 +113,7 @@ export function HomeIndexPage() {
     <div className="py-3 w-full h-full">
       <form className="mb-3">
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-dropdown">選択してください</label>
+          <label htmlFor="my-dropdown">作成したい名前</label>
           <VSCodeDropdown className="w-full" id="my-dropdown" onChange={handleSelectOption}>
             {
               options.map((option) => (
