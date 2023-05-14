@@ -62,8 +62,15 @@ class WebViewProvider {
 				const model = config.get("model") as "gpt-4" | "gpt-3.5-turbo-0301" | "gpt-3.5-turbo" | undefined;
 				// Get temperature
 				const temperature = config.get("temperature") as number | undefined;
-				if (!apikey && typeof apikey !== "string") {
+				if (!apikey || typeof apikey !== "string") {
 					vscode.window.showErrorMessage("API key is not set.");
+					webviewView.webview.postMessage({
+						command: "result", value: JSON.stringify({
+							data: [
+								"APIキーが設定されていません"
+							],
+						})
+					});
 					return;
 				}
 				if (!model && typeof model !== "string") {
