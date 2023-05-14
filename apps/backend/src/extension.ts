@@ -73,8 +73,15 @@ class WebViewProvider {
 					});
 					return;
 				}
-				if (!model && typeof model !== "string") {
+				if (!model || typeof model !== "string") {
 					vscode.window.showErrorMessage("No model is set.");
+					webviewView.webview.postMessage({
+						command: "result", value: JSON.stringify({
+							data: [
+								"モデルが設定されていません"
+							],
+						})
+					});
 					return;
 				}
 				const openaiConfig = new Configuration({ apiKey: apikey });
