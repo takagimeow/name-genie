@@ -2,6 +2,14 @@ import React, { useCallback, FormEvent, useState, useEffect, useContext } from "
 import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField, VSCodeProgressRing } from "@vscode/webview-ui-toolkit/react";
 import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
+import { z } from "zod";
+
+const schema = {
+  command: z.union([z.literal("variableName"), z.literal("functionName"), z.literal("fileName")]),
+  description1: z.string().nonempty().max(144),
+  description2: z.string().max(144).optional(),
+  description3: z.string().max(144).optional(),
+}
 
 export function HomeIndexPage() {
   const { vscode } = useContext(VSCodeContext);
@@ -13,6 +21,9 @@ export function HomeIndexPage() {
   const [description1, setDescription1] = useState("");
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
+  const [description1Error, setDescription1Error] = useState("");
+  const [description2Error, setDescription2Error] = useState("");
+  const [description3Error, setDescription3Error] = useState("");
   const handleSelectOption = useCallback((e: Event | React.FormEvent<HTMLElement>) => {
     // retrieve selected option value from event
     const selectedOption = (e.target as HTMLSelectElement).value;
@@ -38,6 +49,35 @@ export function HomeIndexPage() {
   }, []);
   const handleSubmit = useCallback((e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+
+    // 検証
+    const result = schema.command.safeParse(selectedOption);
+    if (!result.success) {
+      return;
+    }
+    const result1 = schema.description1.safeParse(description1);
+    if (!result1.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result1.error.issues[0].message;
+      setDescription1Error(errorMessage);
+    }
+    const result2 = schema.description2.safeParse(description2);
+    if (!result2.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result2.error.issues[0].message;
+      setDescription2Error(errorMessage);
+    }
+    const result3 = schema.description3.safeParse(description3);
+    if (!result3.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result3.error.issues[0].message;
+      setDescription3Error(errorMessage);
+    }
+
+    if (!result.success || !result1.success || !result2.success || !result3.success) {
+      return;
+    }
+
     setLoading(true);
     setSubmitted(true);
 
@@ -81,14 +121,29 @@ export function HomeIndexPage() {
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-1">説明1<span className="text-red-500">*</span></label>
           <VSCodeTextField id="my-text-field-1" name="example1" className="w-full" onChange={handleDescriptionChange} />
+          {
+            description1Error && (
+              <p className="text-red-500 text-xs">{description1Error}</p>
+            )
+          }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-2">説明2<span className="">{"(オプション)"}</span></label>
           <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          {
+            description2Error && (
+              <p className="text-red-500 text-xs">{description2Error}</p>
+            )
+          }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-3">説明3<span className="">{"(オプション)"}</span></label>
           <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          {
+            description3Error && (
+              <p className="text-red-500 text-xs">{description3Error}</p>
+            )
+          }
         </div>
         <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Submit</VSCodeButton>
       </form>
