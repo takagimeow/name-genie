@@ -2,6 +2,14 @@ import React, { useCallback, FormEvent, useState, useEffect, useContext } from "
 import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField, VSCodeProgressRing } from "@vscode/webview-ui-toolkit/react";
 import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
+import { z } from "zod";
+
+const schema = {
+  command: z.union([z.literal("variableName"), z.literal("functionName"), z.literal("fileName")]),
+  description1: z.string().nonempty().max(144),
+  description2: z.string().max(144).optional(),
+  description3: z.string().max(144).optional(),
+}
 
 export function HomeIndexPage() {
   const { vscode } = useContext(VSCodeContext);
