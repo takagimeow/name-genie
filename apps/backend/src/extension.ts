@@ -65,7 +65,7 @@ class WebViewProvider {
 			async message => {
 				console.log("message: ", message);
 
-				const config = vscode.workspace.getConfiguration("chatgpt-editor");
+				const config = vscode.workspace.getConfiguration("name-genie");
 				// Obtain an API key
 				const apikey = config.get("apiKey") as string | undefined;
 				// Obtain a model
@@ -90,7 +90,7 @@ class WebViewProvider {
 						break;
 					}
 				}
-				let text = ''
+				let text = "";
 				const descriptions = [message.description1, message.description2, message.description3]
 				descriptions.filter((value) => value).map((value) => { text += `- ${value}\n`  })
 				const prompt = `
