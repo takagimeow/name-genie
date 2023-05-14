@@ -104,9 +104,11 @@ class WebViewProvider {
 				===
 
 				{
-					"result1": "createAudio",
-					"result2": "convertTextToAudio",
-					"result3": "convertTxtToAudio"
+					data: [
+						"createAudio",
+						"convertTextToAudio",
+						"convertTxtToAudio"
+					]
 				}
 
 				# Task
