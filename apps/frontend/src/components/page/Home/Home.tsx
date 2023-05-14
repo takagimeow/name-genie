@@ -132,7 +132,7 @@ export function HomeIndexPage() {
           }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-text-field-2">説明2<span className="">{"(オプション)"}</span></label>
+          <label htmlFor="my-text-field-2">説明2<span className="">{"(任意)"}</span></label>
           <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" placeholder="変換された文字列は日本語になる" onChange={handleDescriptionChange}/>
           {
             description2Error && (
@@ -141,7 +141,7 @@ export function HomeIndexPage() {
           }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-text-field-3">説明3<span className="">{"(オプション)"}</span></label>
+          <label htmlFor="my-text-field-3">説明3<span className="">{"(任意)"}</span></label>
           <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" placeholder="32文字以内で作成してください" onChange={handleDescriptionChange}/>
           {
             description3Error && (
