@@ -1,20 +1,44 @@
-# name-genie README
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="static/name-genie.png">
+    <img alt="Name Genie" src="static/name-genie.png" width="100%">
+  </picture>
+</p>
 
-This is the README for your extension "name-genie". After writing up a brief description, we recommend including the following sections.
+<div align="center">
+
+# Name Genie
+
+**The VSCode extension addresses the common challenge that developers face when it comes to naming. It provides a solution for naming conventions.**
+
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/takagimeow.name-genie)](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+[![Github stars](https://img.shields.io/github/stars/takagimeow/name-genie)](https://github.com/takagimeow/name-genie)
+
+</div>
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The extension provides the following features:
 
-For example if there is an image subfolder under your extension project workspace:
+- Name Genie automatically generates names for variables, functions, and class names that you want to create.
+- You can provide up to three descriptions, and the feature will generate a name based on the given descriptions.
 
-\!\[feature X\]\(images/feature-x.png\)
+![Name Genie WebView](static/ask-genie.png)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Links
+
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=takagimeow.name-genie)
+- [GitHub Repository](https://github.com/takagimeow/name-genie)
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+In order to use this extension, you will need an API key from OpenAI.
+
+1. Go to [OpenAI's account page](https://platform.openai.com/account/api-keys). If you don't have an account, you will need to create one or sign up.
+2. Click on the `Create new secret key` button.
+3. Copy the key and paste it into the `API Key for ChatGPT` field in the extension settings.
 
 ## Extension Settings
 
@@ -24,12 +48,31 @@ For example:
 
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- `name-genie.apiKey`: The key is used to authenticate with the OpenAI API.
 
-## Known Issues
+| Key                 | Description                                          | Value       |
+| ------------------- | ---------------------------------------------------- | ----------- |
+| `name-genie.apiKey` | The key is used to authenticate with the OpenAI API. | `xx-xx-xxx` |
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+For this extension to work, the above setting must be set.
+
+Optional settings:
+
+| Key                      | Description                             | Value                                          |
+| ------------------------ | --------------------------------------- | ---------------------------------------------- |
+| `name-genie.model`       | The model used to generate texts.       | `gpt-4`, `gpt-3.5-turbo-0301`, `gpt-3.5-turbo` |
+| `name-genie.temperature` | The temperature used to generate texts. | `0.1` ~ `1.0`                                  |
+
+## Disclaimer
+
+This extension is not an official extension of OpenAI.
+The author of this extension is not affiliated with OpenAI in any way.
+
+## Privacy Policy
+
+The texts are generated via the online service of [ChatGPT](http://chat.openai.com/).
+Please take a look at the [privacy policy](https://openai.com/policies/privacy-policy) of OpenAI.
+Do not use this extension if you do not agree with the privacy policy.
 
 ## Release Notes
 
@@ -37,35 +80,6 @@ Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+Initial release of name-genie
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT LICENSE](LICENSE)
