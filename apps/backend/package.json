@@ -12,12 +12,6 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "name-genie.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "views": {
       "explorer": [
         {
