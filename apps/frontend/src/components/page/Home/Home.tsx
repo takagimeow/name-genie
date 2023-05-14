@@ -21,6 +21,9 @@ export function HomeIndexPage() {
   const [description1, setDescription1] = useState("");
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
+  const [description1Error, setDescription1Error] = useState("");
+  const [description2Error, setDescription2Error] = useState("");
+  const [description3Error, setDescription3Error] = useState("");
   const handleSelectOption = useCallback((e: Event | React.FormEvent<HTMLElement>) => {
     // retrieve selected option value from event
     const selectedOption = (e.target as HTMLSelectElement).value;
@@ -46,6 +49,35 @@ export function HomeIndexPage() {
   }, []);
   const handleSubmit = useCallback((e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+
+    // 検証
+    const result = schema.command.safeParse(selectedOption);
+    if (!result.success) {
+      return;
+    }
+    const result1 = schema.description1.safeParse(description1);
+    if (!result1.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result1.error.issues[0].message;
+      setDescription1Error(errorMessage);
+    }
+    const result2 = schema.description2.safeParse(description2);
+    if (!result2.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result2.error.issues[0].message;
+      setDescription2Error(errorMessage);
+    }
+    const result3 = schema.description3.safeParse(description3);
+    if (!result3.success) {
+      // retrieve error message from zod error message
+      const errorMessage = result3.error.issues[0].message;
+      setDescription3Error(errorMessage);
+    }
+
+    if (!result.success || !result1.success || !result2.success || !result3.success) {
+      return;
+    }
+
     setLoading(true);
     setSubmitted(true);
 
