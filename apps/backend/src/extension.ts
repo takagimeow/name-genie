@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import { join, sep } from 'path';
 import * as vscode from 'vscode';
 import { Configuration, OpenAIApi } from "openai";
+import { options } from "common-variable";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -83,28 +84,11 @@ class WebViewProvider {
 				const openaiClient = new OpenAIApi(openaiConfig);
 
 				let command = "関数名";
-				switch (message.command) {
-					case "variableName":
-						command = "変数名";
+				for (const option of options) {
+					if (option.value === message.command) {
+						command = option.text;
 						break;
-					case "functionName":
-						command = "関数名";
-						break;
-					case "fileName":
-						command = "ファイル名";
-						break;
-					case "className":
-						command = "クラス名";
-						break;
-					case "branchName":
-						command = "ブランチ名";
-						break;
-					case "commitMessage":
-						command = "コミットメッセージ";
-						break;
-					case "pullRequestTitle":
-						command = "プルリクエストのタイトル";
-						break;
+					}
 				}
 				let text = ''
 				const descriptions = [message.description1, message.description2, message.description3]

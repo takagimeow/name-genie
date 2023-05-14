@@ -3,44 +3,13 @@ import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField, VSCodeProg
 import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
 import { z } from "zod";
-
+import { options } from "common-variable";
 const schema = {
-  command: z.union([z.literal("variableName"), z.literal("functionName"), z.literal("fileName"), z.literal("className"), z.literal("branchName"), z.literal("commitMessage"), z.literal("pullRequestTitle")]),
+  command: z.union([z.literal("variableName"), z.literal("functionName"), z.literal("fileName"), z.literal("className"), z.literal("interfaceName"), z.literal("branchName"), z.literal("commitMessage"), z.literal("pullRequestTitle")]),
   description1: z.string().nonempty().max(144),
   description2: z.string().max(144).optional(),
   description3: z.string().max(144).optional(),
 }
-
-const options: { value: string; text: string; }[] = [
-  {
-    value: "variableName",
-    text: "変数名",
-  },
-  {
-    value: "functionName",
-    text: "関数名",
-  },
-  {
-    value: "className",
-    text: "クラス名",
-  },
-  {
-    value: "branchName",
-    text: "ブランチ名",
-  },
-  {
-    value: "commitMessage",
-    text: "コミットメッセージ",
-  },
-  {
-    value: "pullRequestTitle",
-    text: "プルリクエストタイトル",
-  },
-  {
-    value: "fileName",
-    text: "ファイル名",
-  },
-]
 
 export function HomeIndexPage() {
   const { vscode } = useContext(VSCodeContext);
