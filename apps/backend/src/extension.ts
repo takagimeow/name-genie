@@ -110,21 +110,29 @@ class WebViewProvider {
 				const descriptions = [message.description1, message.description2, message.description3]
 				descriptions.filter((value) => value).map((value) => { text += `- ${value}\n`  })
 				const prompt = `
-				次の内容を表す${command}を3つ作成してください。
-				===
-				${text}
-				===
-
+				# Example
+				次の内容を表す関数名を3つ作成してください。
 				出力結果は次のJSONフォーマットに沿って出力してください。
 				それ以外の文字列は出力しないでください。
 				===
+				- 音声を作成する
+				- テキストを音声に変換する
+				===
+
 				{
 					"result1": "createAudio",
 					"result2": "convertTextToAudio",
 					"result3": "convertTxtToAudio"
 				}
+
+				# Task
+				次の内容を表す${command}を3つ作成してください。
+				出力結果は次のJSONフォーマットに沿って出力してください。
+				それ以外の文字列は出力しないでください。
 				===
-				`
+				${text}
+				===
+				`;
 				let content = "";
 				try {
 					const response = await openaiClient.createChatCompletion({
