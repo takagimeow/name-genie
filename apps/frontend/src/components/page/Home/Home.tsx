@@ -111,7 +111,7 @@ export function HomeIndexPage() {
   }, [])
   return (
     <div className="py-3 w-full h-full">
-      <form>
+      <form className="mb-3">
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-dropdown">選択してください</label>
           <VSCodeDropdown className="w-full" id="my-dropdown" onChange={handleSelectOption}>
@@ -153,7 +153,7 @@ export function HomeIndexPage() {
       </form>
       {
         submitted && (
-          <div className="w-full h-full py-3 flex flex-col">
+          <div className={`w-full h-full flex flex-col ${styles['result-container']}`}>
             {
               loading ? (
                 <div className="flex flex-col items-center justify-center">
@@ -161,7 +161,6 @@ export function HomeIndexPage() {
                 </div>
               ) : (
                 <>
-                  <p mb-3>結果</p>
                   <ul>
                     {
                       results.map((value) => {
