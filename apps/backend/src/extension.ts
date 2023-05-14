@@ -95,6 +95,18 @@ class WebViewProvider {
 					case "fileName":
 						command = "ファイル名";
 						break;
+					case "className":
+						command = "クラス名";
+						break;
+					case "branchName":
+						command = "ブランチ名";
+						break;
+					case "commitMessage":
+						command = "コミットメッセージ";
+						break;
+					case "pullRequestTitle":
+						command = "プルリクエストのタイトル";
+						break;
 				}
 				let text = ''
 				const descriptions = [message.description1, message.description2, message.description3]
