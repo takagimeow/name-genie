@@ -68,19 +68,17 @@ class WebViewProvider {
 				// Obtain an API key
 				const apikey = config.get("apiKey") as string | undefined;
 				// Obtain a model
-				// const model = config.get("model") as GPTModel | undefined;
+				const model = config.get("model") as "gpt-4" | "gpt-3.5-turbo-0301" | "gpt-3.5-turbo" | undefined;
 				// Get temperature
 				// const temperature = config.get("temperature") as number | undefined;
 				if (!apikey && typeof apikey !== "string") {
 					vscode.window.showErrorMessage("API key is not set.");
 					return;
 				}
-				/*
 				if (!model && typeof model !== "string") {
 					vscode.window.showErrorMessage("No model is set.");
 					return;
 				}
-				*/
 				const openaiConfig = new Configuration({ apiKey: apikey });
 				const openaiClient = new OpenAIApi(openaiConfig);
 
@@ -127,12 +125,24 @@ class WebViewProvider {
 				}
 				===
 				`
-				const response = await openaiClient.createChatCompletion({
-					model: "gpt-4",
-					messages: [{ role: "user", content: prompt }],
-				});
-				const content = response.data.choices[0].message?.content;
-				console.log("content: ", content);
+				let content = "";
+				try {
+					const response = await openaiClient.createChatCompletion({
+						model: model ?? "gpt-3.5",
+						messages: [{ role: "user", content: prompt }],
+						temperature: temperature ?? 0.1,
+					});
+					content = response.data.choices[0].message?.content ?? "";
+					console.log("content: ", content);
+					// check if the result is valid JSON
+					JSON.parse(content);
+				} catch(e) {
+					console.log(e);
+					content = JSON.stringify({
+						"result1": "結果が見つかりませんでした",
+					});
+				}
+
 				// send message
 				webviewView.webview.postMessage({ command: "result", value: content });
 			}
