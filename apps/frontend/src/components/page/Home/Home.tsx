@@ -113,7 +113,7 @@ export function HomeIndexPage() {
     <div className="py-3 w-full h-full">
       <form className="mb-3">
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-dropdown">選択してください</label>
+          <label htmlFor="my-dropdown">作成したい名前</label>
           <VSCodeDropdown className="w-full" id="my-dropdown" onChange={handleSelectOption}>
             {
               options.map((option) => (
@@ -124,7 +124,7 @@ export function HomeIndexPage() {
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-1">説明1<span className="text-red-500">*</span></label>
-          <VSCodeTextField id="my-text-field-1" name="example1" className="w-full" onChange={handleDescriptionChange} />
+          <VSCodeTextField id="my-text-field-1" name="example1" className="w-full" placeholder="動画の音声を文字列に変換する" onChange={handleDescriptionChange} />
           {
             description1Error && (
               <p className="text-red-500 text-xs">{description1Error}</p>
@@ -132,8 +132,8 @@ export function HomeIndexPage() {
           }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-text-field-2">説明2<span className="">{"(オプション)"}</span></label>
-          <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          <label htmlFor="my-text-field-2">説明2<span className="">{"(任意)"}</span></label>
+          <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" placeholder="変換された文字列は日本語になる" onChange={handleDescriptionChange}/>
           {
             description2Error && (
               <p className="text-red-500 text-xs">{description2Error}</p>
@@ -141,15 +141,15 @@ export function HomeIndexPage() {
           }
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
-          <label htmlFor="my-text-field-3">説明3<span className="">{"(オプション)"}</span></label>
-          <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" onChange={handleDescriptionChange}/>
+          <label htmlFor="my-text-field-3">説明3<span className="">{"(任意)"}</span></label>
+          <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" placeholder="32文字以内で作成してください" onChange={handleDescriptionChange}/>
           {
             description3Error && (
               <p className="text-red-500 text-xs">{description3Error}</p>
             )
           }
         </div>
-        <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Submit</VSCodeButton>
+        <VSCodeButton disabled={loading} className="w-full" appearance="primary" onClick={handleSubmit}>Ask AI</VSCodeButton>
       </form>
       {
         submitted && (
