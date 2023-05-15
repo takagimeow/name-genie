@@ -67,7 +67,8 @@ class WebViewProvider {
 					webviewView.webview.postMessage({
 						command: "result", value: JSON.stringify({
 							data: [
-								"APIキーが設定されていません"
+								"APIキーが設定されていません",
+								"設定画面から「name-genie.apiKey」を検索して、APIキーを設定してください",
 							],
 						})
 					});
@@ -78,7 +79,8 @@ class WebViewProvider {
 					webviewView.webview.postMessage({
 						command: "result", value: JSON.stringify({
 							data: [
-								"モデルが設定されていません"
+								"モデルが設定されていません",
+								"設定画面から「name-genie.model」を検索して、モデルを設定してください"
 							],
 						})
 					});
