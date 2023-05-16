@@ -78,6 +78,10 @@ Do not use this extension if you do not agree with the privacy policy.
 
 Users appreciate release notes as you update your extension.
 
+### 1.1.0
+
+Enable output format selection from presets
+
 ### 1.0.0
 
 Initial release of name-genie
