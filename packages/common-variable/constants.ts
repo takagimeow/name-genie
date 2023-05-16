@@ -32,3 +32,41 @@ export const options: { value: string; text: string; }[] = [
     text: "ファイル名",
   },
 ]
+
+export const presets: { key: string; value: string; text: string; }[] = [
+  {
+    key: "none",
+    value: "なし",
+    text: "なし",
+  },
+  {
+    key: "hyphenSeparated",
+    value: "ハイフン区切り",
+    text: "ハイフン区切り",
+  },
+  {
+    key: "startWithLowerCase",
+    value: "小文字から始めてください",
+    text: "小文字で始める",
+  },
+  {
+    key: "camelCase",
+    value: "キャメルケースで作成してください",
+    text: "キャメルケース",
+  },
+  {
+    key: "cebabCase",
+    value: "ケバブケースで作成してください",
+    text: "ケバブケース",
+  },
+  {
+    key: "snakeCase",
+    value: "スネークケースで作成してください",
+    text: "スネークケース",
+  },
+  {
+    key: "pascalCase",
+    value: "パスカルケースで作成してください",
+    text: "パスカルケース",
+  },
+];

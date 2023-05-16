@@ -3,12 +3,13 @@ import { VSCodeButton, VSCodeDropdown, VSCodeOption, VSCodeTextField, VSCodeProg
 import styles from "./Home.module.css";
 import { VSCodeContext } from "../../ui/VSCodeProvider/VSCodeProvider";
 import { z } from "zod";
-import { options } from "common-variable";
+import { options, presets } from "common-variable";
 const schema = {
   command: z.union([z.literal("variableName"), z.literal("functionName"), z.literal("fileName"), z.literal("className"), z.literal("interfaceName"), z.literal("branchName"), z.literal("commitMessage"), z.literal("pullRequestTitle")]),
   description1: z.string().nonempty().max(144),
   description2: z.string().max(144).optional(),
   description3: z.string().max(144).optional(),
+  preset: z.string().nonempty(),
 }
 
 export function HomeIndexPage() {
@@ -23,18 +24,30 @@ export function HomeIndexPage() {
   const [description1Error, setDescription1Error] = useState("");
   const [description2Error, setDescription2Error] = useState("");
   const [description3Error, setDescription3Error] = useState("");
+  const [preset, setPreset] = useState("なし");
   const handleSelectOption = useCallback((e: Event | React.FormEvent<HTMLElement>) => {
+    // retrieve id
+    const id = (e.target as any)?.id;
+    console.log("id: ", id);
     // retrieve selected option value from event
     const selectedOption = (e.target as HTMLSelectElement).value;
-    setSelectedOption(selectedOption);
+    switch (id) {
+      case "my-dropdown":
+        setSelectedOption(selectedOption);
+        break;
+      case "my-dropdown-preset":
+        setPreset(selectedOption);
+        break;
+    }
   }, []);
   const handleDescriptionChange = useCallback((e: Event | React.FormEvent<HTMLElement>) => {
     // retrieve id
     const id = (e.target as any)?.id;
+    console.log("id: ", id);
     // retrieve value
     const value = (e.target as any)?.value ?? "";
     if (!id) return;
-    switch(id) {
+    switch (id) {
       case "my-text-field-1":
         setDescription1(value);
         break;
@@ -72,10 +85,16 @@ export function HomeIndexPage() {
       const errorMessage = result3.error.issues[0].message;
       setDescription3Error(errorMessage);
     }
-
-    if (!result.success || !result1.success || !result2.success || !result3.success) {
+    const result4 = schema.preset.safeParse(preset);
+    if (!result4.success) {
       return;
     }
+
+    if (!result.success || !result1.success || !result2.success || !result3.success || !result4.success) {
+      return;
+    }
+
+    console.log("preset: ", preset);
 
     setDescription1Error("");
     setDescription2Error("");
@@ -88,8 +107,9 @@ export function HomeIndexPage() {
       description1,
       description2,
       description3,
+      preset,
     });
-  }, [vscode, selectedOption, description1, description2, description3]);
+  }, [selectedOption, description1, description2, description3, preset, vscode]);
 
   useEffect(() => {
     const callback = (event: MessageEvent) => {
@@ -126,6 +146,16 @@ export function HomeIndexPage() {
           </VSCodeDropdown>
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
+          <label htmlFor="my-dropdown-preset">プリセット</label>
+          <VSCodeDropdown className="w-full" id="my-dropdown-preset" onChange={handleSelectOption}>
+            {
+              presets.map((preset) => (
+                <VSCodeOption key={preset.key} value={preset.value}>{preset.text}</VSCodeOption>
+              ))
+            }
+          </VSCodeDropdown>
+        </div>
+        <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-1">説明1<span className="text-red-500">*</span></label>
           <VSCodeTextField id="my-text-field-1" name="example1" className="w-full" placeholder="動画の音声を文字列に変換する" onChange={handleDescriptionChange} />
           {
@@ -136,7 +166,7 @@ export function HomeIndexPage() {
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-2">説明2<span className="">{"(任意)"}</span></label>
-          <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" placeholder="変換された文字列は日本語になる" onChange={handleDescriptionChange}/>
+          <VSCodeTextField id="my-text-field-2" name="example1" className="w-full" placeholder="変換された文字列は日本語になる" onChange={handleDescriptionChange} />
           {
             description2Error && (
               <p className="text-red-500 text-xs">{description2Error}</p>
@@ -145,7 +175,7 @@ export function HomeIndexPage() {
         </div>
         <div className={`${styles['dropdown-container']} mb-3 w-full`}>
           <label htmlFor="my-text-field-3">説明3<span className="">{"(任意)"}</span></label>
-          <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" placeholder="32文字以内で作成してください" onChange={handleDescriptionChange}/>
+          <VSCodeTextField id="my-text-field-3" name="example1" className="w-full" placeholder="32文字以内で作成してください" onChange={handleDescriptionChange} />
           {
             description3Error && (
               <p className="text-red-500 text-xs">{description3Error}</p>
