@@ -99,6 +99,9 @@ class WebViewProvider {
 				let text = "";
 				const descriptions = [message.description1, message.description2, message.description3]
 				descriptions.filter((value) => value).map((value) => { text += `- ${value}\n`  })
+				if (message.preset !== "なし") {
+					text += `- ${message.preset}\n`
+				}
 				const prompt = `
 				# Example
 				次の内容を表す関数名を3つ作成してください。
